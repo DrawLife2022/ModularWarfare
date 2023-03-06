@@ -30,19 +30,6 @@ public class ClientEventHandler {
         InstantBulletRenderer.RenderAllTrails(event.getPartialTicks());
     }
 
-    @SubscribeEvent
-    public void onGuiLaunch(GuiOpenEvent event) {
-        if (ModConfig.INSTANCE.general.customInventory) {
-            if (event.getGui() != null && event.getGui().getClass() == GuiInventory.class) {
-                final EntityPlayer player = Minecraft.getMinecraft().player;
-                if (!player.isCreative()) {
-                    event.setCanceled(true);
-                    ModularWarfare.NETWORK.sendToServer(new PacketOpenGui(0));
-                }
-            }
-        }
-    }
-
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void onClientDisconnect(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) {
